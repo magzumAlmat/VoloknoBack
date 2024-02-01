@@ -70,9 +70,34 @@ const getOrderById = async (req, res) => {
 
 }
 
+
+const deleteOrderById = async (req, res) => {
+    const { id } = req.params;
+    try {
+      // Ищем продукт по идентификатору и удаляем его
+      const order = await Order.destroy({
+        where: { id: id },
+      });
+  
+      // Если продукт не найден, возвращаем ошибку
+      if (!order) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+  
+      // Возвращаем успешный статус и информацию об удаленном продукте
+      return res.status(200).json({
+        message: "Product deleted successfully",
+        deletedOrder: order,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
 module.exports = {
     getOrderById,
     getAllOrders,
     createOrder,
-    editOrder
+    editOrder,
+    deleteOrderById
 }

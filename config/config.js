@@ -9,16 +9,16 @@ module.exports = {
   },
 
   production: {
-    // username:'doadmin',
-    // password:'AVNS_nH1mMs0Lohu1k10zHK3',
-    // database:'defaultdb',
-    // host:'db-postgresql-nyc1-25118-do-user-11457016-0.b.db.ondigitalocean.com',
-    // dialect:'postgres',
-    // port:25060,
-    // dialectOptions: {
-    //     ssl: {
-    //       ca: fs.readFileSync('config/ca-certificate.crt')
-    //     },
-    // },
+    username:'doadmin',
+    password:'AVNS_7griogjZIb7dbTscTAV',
+    database:'defaultdb',
+    host:'db-postgresql-sgp1-marketplace-do-user-15552454-0.c.db.ondigitalocean.com',
+    dialect:'postgres',
+    port:25060,
+    dialectOptions: {
+        ssl: {
+          ca: fs.readFileSync('config/ca-certificate.crt')
+        },
+    },
   },
 };

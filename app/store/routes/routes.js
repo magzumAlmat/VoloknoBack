@@ -16,7 +16,7 @@ router.get('/api/store/allorders', getAllOrders);
 router.post('/api/store/createproduct',upload.array('image',5), createProduct);
 router.delete('/api/store/product/:id', deleteProductById);
 router.delete('/api/store/order/:id', deleteOrderById);
-router.post('/api/store/product/:id', upload.array('image',5), editProduct);
+router.put('/api/store/product/:id', upload.array('image',5), editProduct);
 router.post('/api/store/createorder', createOrder);
 router.post('/api/store/order/:id/editorder', editOrder);
 

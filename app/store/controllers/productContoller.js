@@ -28,6 +28,7 @@ async function createProduct(req, res) {
       image: imageUrls,
       description,
     });
+    console.log('NEW PRODUCT', newProduct);
     return res.status(201).json(newProduct);
   } catch (error) {
     console.error(error);
@@ -98,9 +99,10 @@ async function editProduct(req, res) {
   imageUrls = imageUrls.slice(0, -1);
 
   const productId = req.params.id
-  console.log(req.body, req.params.id)
+  console.log("EDIT ---------", productId);
+
   try {
-      Product.update({
+      const product = Product.update({
           mainType: req.body.mainType,
           type: req.body.type,
           name: req.body.name,
@@ -110,8 +112,11 @@ async function editProduct(req, res) {
           description: req.body.description,
       }, {
           where: { id: productId },
-          returning: true,
       });
+      console.log('EDIT PRODUCT',{product});
+
+
+      return res.status(200).json({product})
   } catch (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal Server Error' });

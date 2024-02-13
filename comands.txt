@@ -64,3 +64,5 @@ server {
                 try_files $uri $uri/ $uri/index.html @proxy;
         }
 }
+- link for create ssl certificate
+https://support.hostinger.com/en/articles/6865487-how-to-install-ssl-on-vps-using-certbot

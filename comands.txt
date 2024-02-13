@@ -39,3 +39,28 @@ pm2 start "npm run prod" --name hh.kz
 npx sequelize-cli db:migrate:undo:all
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed --seed seedproduct.js
+
+cd /etc/nginx/sites-available 
+nano default
+
+nginx server config for nextjs
+https://habr.com/ru/articles/706838/
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/nextjs/.next/server/pages;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name scvolokno.kz;
+        
+        location @proxy {
+        include proxy_params;
+
+        proxy_pass http://185.129.49.196:3000;
+        }
+
+        location / {
+                try_files $uri $uri/ $uri/index.html @proxy;
+        }
+}

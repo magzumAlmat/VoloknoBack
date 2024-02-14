@@ -24,6 +24,7 @@ npx sequelize-cli db:seed --seed <seed-file-name>
 
 
 
+
 запуск на серваке
 
 NODE_ENV=production npx sequelize db:migrate

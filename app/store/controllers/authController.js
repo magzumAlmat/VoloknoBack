@@ -3,7 +3,7 @@ async function doLogin(req, res) {
     const bcrypt = require('bcrypt');
     const staticUserData = {
         username: 'admin',
-        password: '$2a$12$9PMW/PsEWRa8X29TA/O5judBbnQtnTm4kcfR7cepKISmM7Dn2Rvku', // Хэшированный пароль 'root'
+        password: '$2a$12$ihDdOYP54kgjkGfEgw8yHe6FRDBaPtxMhYPVPB5ZPf0vGKKcdALa2', // Хэшированный пароль 'jKez2bd6TXNpcqT7kCHh'
     };
     try {
         const { username, password } = req.body;

@@ -45,24 +45,61 @@ nano default
 
 nginx server config for nextjs
 https://habr.com/ru/articles/706838/
+----------------------------------------------------------------------------------------------------------------------
 server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        root /var/www/nextjs/.next/server/pages;
 
-        index index.html index.htm index.nginx-debian.html;
+	root /var/www/nextjs/.next/server/pages;
 
-        server_name scvolokno.kz;
-        
-        location @proxy {
-        include proxy_params;
+	index index.html index.htm index.nginx-debian.html;
 
-        proxy_pass http://185.129.49.196:3000;
-        }
+	server_name scvolokno.kz;
+	
+	location @proxy {
+	include proxy_params;
 
-        location / {
-                try_files $uri $uri/ $uri/index.html @proxy;
-        }
+	proxy_pass http://localhost:3000;
+	}
+
+	location / {
+		try_files $uri $uri/ $uri/index.html @proxy;
+		
+	}
+
+	location /api {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+	location /public {
+	proxy_pass http://localhost:8000;
+
+}
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/scvolokno.kz/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/scvolokno.kz/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = scvolokno.kz) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	server_name scvolokno.kz;
+    return 404; # managed by Certbot
+
+
 }
 - link for create ssl certificate
 https://support.hostinger.com/en/articles/6865487-how-to-install-ssl-on-vps-using-certbot
